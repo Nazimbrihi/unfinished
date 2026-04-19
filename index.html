@@ -113,7 +113,6 @@
     color: var(--dusty-rose);
     font-weight: 500;
     margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
   }
 
   .hero-title {
@@ -124,7 +123,7 @@
     color: var(--ink);
     letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+    
   }
   .hero-title em { font-style: italic; color: var(--dusty-rose); }
 
@@ -135,12 +134,12 @@
     line-height: 1.7;
     margin-bottom: 2.5rem;
     font-weight: 300;
-    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+    
   }
 
   .hero-actions {
     display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+    
   }
 
   .btn {
@@ -166,7 +165,7 @@
   .hero-stat {
     margin-top: 4rem;
     display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+    
   }
   .stat { text-align: center; }
   .stat-num {
@@ -447,5 +446,710 @@
     padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 4rem) 0;
     max-width: 700px; margin: 0 auto;
     text-align: center;
-  *
-
+  }
+  .submit-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+  .submit-title em { font-style: italic; color: var(--dusty-rose); }
+  .submit-sub { font-size: 1rem; color: var(--stone); line-height: 1.7; font-weight: 300; }
+
+  .submit-form-wrap {
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem) 5rem;
+    max-width: 700px; margin: 0 auto;
+  }
+
+  .form-group { margin-bottom: 1.75rem; }
+  .form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+  .form-hint { font-size: 0.78rem; color: var(--stone); margin-top: 0.3rem; }
+
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--charcoal);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    appearance: none;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--stone);
+    box-shadow: 0 0 0 3px rgba(140,132,128,0.12);
+  }
+  .form-textarea { min-height: 110px; resize: vertical; line-height: 1.65; }
+
+  .form-select { background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238c8480' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+
+  .range-wrap { display: flex; align-items: center; gap: 1rem; }
+  .form-range { flex: 1; appearance: none; height: 4px; background: var(--border); border-radius: 4px; outline: none; cursor: pointer; }
+  .form-range::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); cursor: pointer; }
+  .range-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    min-width: 3rem;
+    text-align: right;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+  .submit-success {
+    text-align: center;
+    padding: 3rem;
+    display: none;
+  }
+  .submit-success.show { display: block; }
+  .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .success-sub { font-size: 0.95rem; color: var(--stone); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(30,27,25,0.6);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 500px; width: 100%;
+    transform: translateY(20px); transition: transform 0.25s;
+    position: relative;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal-close {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    background: var(--parchment); border: none; border-radius: 50%;
+    width: 30px; height: 30px;
+    font-size: 1rem; cursor: pointer; color: var(--stone);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: var(--sand); color: var(--charcoal); }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .modal-sub { font-size: 0.9rem; color: var(--stone); margin-bottom: 1.75rem; line-height: 1.6; }
+
+  .modal-adopt-title {
+    background: var(--parchment);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--stone);
+  }
+  .footer-copy { font-size: 0.78rem; color: var(--warm-gray); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { opacity: 0; animation: fadeUp 0.5s forwards; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      gap: 1.25rem;
+    }
+    .hamburger { display: flex; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stat { gap: 2rem; }
+  }
+
+  /* ── TOMBSTONE DECO ── */
+  .tombstone-strip {
+    display: flex; gap: 2rem; overflow: hidden;
+    padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--parchment);
+    margin: 2rem 0;
+  }
+  .tombstone-strip span {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--warm-gray);
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 5rem 2rem;
+    color: var(--stone);
+  }
+  .no-results-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('landing')">Un<span>finished</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('landing')" data-page="landing" class="active">Home</a></li>
+    <li><a onclick="showPage('browse')" data-page="browse">Browse</a></li>
+    <li><a onclick="showPage('submit')" data-page="submit" class="nav-cta">Submit yours</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-title">Adopt this project</div>
+    <div class="modal-sub">So this idea caught your eye. Tell the original author you're picking it up — they gave up so you don't have to.</div>
+    <div class="modal-adopt-title" id="modalProjectTitle">—</div>
+    <div class="form-group">
+      <label class="form-label">Your name</label>
+      <input class="form-input" type="text" placeholder="What do people call you?">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your email</label>
+      <input class="form-input" type="email" placeholder="So they can hand over the torch">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Why will you finish it?</label>
+      <textarea class="form-textarea" placeholder="One good reason you won't also abandon this..."></textarea>
+    </div>
+    <button class="btn btn-primary" style="width:100%" onclick="submitAdopt()">Send adoption request</button>
+  </div>
+</div>
+
+<!-- ─────────────── LANDING PAGE ─────────────── -->
+<div class="page active" id="page-landing">
+
+  <section class="hero">
+    <div class="hero-eyebrow">A graveyard for good ideas</div>
+    <h1 class="hero-title">Your best idea<br><em>never finished.</em></h1>
+    <p class="hero-subtitle">The opposite of a portfolio. A place to bury your abandoned projects with dignity — and maybe watch a stranger dig them back up.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="showPage('browse')">Browse the graveyard</button>
+      <button class="btn btn-secondary" onclick="showPage('submit')">Bury yours too →</button>
+    </div>
+    <div class="hero-stat">
+      <div class="stat"><div class="stat-num">347</div><div class="stat-label">Projects buried</div></div>
+      <div class="stat"><div class="stat-num">89</div><div class="stat-label">Adopted</div></div>
+      <div class="stat"><div class="stat-num">12%</div><div class="stat-label">Actually finished</div></div>
+    </div>
+  </section>
+
+  <div class="tombstone-strip">
+    <span>✦ Built for 3 months, abandoned overnight</span>
+    <span>✦ The app that almost launched</span>
+    <span>✦ A novel that stopped at chapter 4</span>
+    <span>✦ The side project graveyard</span>
+    <span>✦ "I'll finish it next weekend"</span>
+    <span>✦ RIP good intentions</span>
+    <span>✦ Someone else might finish it</span>
+    <span>✦ Built for 3 months, abandoned overnight</span>
+    <span>✦ The app that almost launched</span>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Recently <em>departed</em></h2>
+      <span class="section-link" onclick="showPage('browse')">See all projects →</span>
+    </div>
+    <div class="cards-grid" id="featuredCards"></div>
+  </div>
+
+  <div style="background: var(--parchment); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: clamp(3rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem); text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <div style="font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dusty-rose); margin-bottom: 1rem; font-weight: 500;">The philosophy</div>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--ink); letter-spacing: -0.02em; line-height: 1.3; margin-bottom: 1.25rem; font-weight: 700;">Great ideas deserve a proper burial.<br><em style="color: var(--dusty-rose);">And sometimes, a resurrection.</em></h2>
+      <p style="font-size: 1rem; color: var(--stone); line-height: 1.8; font-weight: 300; margin-bottom: 2rem;">Most abandoned projects don't fail because the idea was bad. They fail because life happened, motivation ran out, or the scope felt infinite. Someone out there still cares about your idea — they just haven't met it yet.</p>
+      <button class="btn btn-primary" onclick="showPage('submit')">Give your project a proper send-off</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Un<span style="font-style:italic">finished</span></div>
+    <div class="footer-copy">Made with love and a large number of abandoned side projects. © 2025</div>
+  </footer>
+</div>
+
+<!-- ─────────────── BROWSE PAGE ─────────────── -->
+<div class="page" id="page-browse">
+  <div class="browse-hero">
+    <h1 class="browse-title">The <em>Graveyard</em></h1>
+    <p class="browse-sub">Every project here had a moment where someone believed in it. Browse with respect.</p>
+  </div>
+
+  <div class="filters-row">
+    <button class="filter-btn active" data-filter="all" onclick="filterCards(this)">All</button>
+    <button class="filter-btn" data-filter="tech" onclick="filterCards(this)">⌨ Tech</button>
+    <button class="filter-btn" data-filter="creative" onclick="filterCards(this)">🎨 Creative</button>
+    <button class="filter-btn" data-filter="business" onclick="filterCards(this)">📊 Business</button>
+    <button class="filter-btn" data-filter="personal" onclick="filterCards(this)">🌱 Personal</button>
+  </div>
+
+  <div class="browse-grid">
+    <div class="cards-grid" id="browseCards"></div>
+    <div id="noResults" style="display:none" class="no-results">
+      <div class="no-results-title">No abandoned projects here.</div>
+      <p>Either everyone finished their work, or nobody had the nerve to post it.</p>
+    </div>
+  </div>
+
+  <div style="height: 4rem;"></div>
+  <footer>
+    <div class="footer-logo">Un<span style="font-style:italic">finished</span></div>
+    <div class="footer-copy">Made with love and a large number of abandoned side projects. © 2025</div>
+  </footer>
+</div>
+
+<!-- ─────────────── PROJECT PAGE ─────────────── -->
+<div class="page" id="page-project">
+  <div class="project-hero" id="projectContent"></div>
+  <footer>
+    <div class="footer-logo">Un<span style="font-style:italic">finished</span></div>
+    <div class="footer-copy">Made with love and a large number of abandoned side projects. © 2025</div>
+  </footer>
+</div>
+
+<!-- ─────────────── SUBMIT PAGE ─────────────── -->
+<div class="page" id="page-submit">
+  <div class="submit-hero">
+    <h1 class="submit-title">Lay it to <em>rest.</em></h1>
+    <p class="submit-sub">You worked on something and didn't finish it. That's okay. More than okay — it's universal. Post it here and maybe someone else will carry the torch.</p>
+  </div>
+
+  <div class="submit-form-wrap">
+    <div id="submitFormArea">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Project name *</label>
+          <input class="form-input" id="sName" type="text" placeholder="What was it called?">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category *</label>
+          <select class="form-select" id="sCat">
+            <option value="">Pick one...</option>
+            <option value="tech">⌨ Tech / App / Software</option>
+            <option value="creative">🎨 Creative / Art / Writing</option>
+            <option value="business">📊 Business / Startup</option>
+            <option value="personal">🌱 Personal / Self-improvement</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What was it? *</label>
+        <textarea class="form-textarea" id="sDesc" placeholder="Describe your project in a few sentences. Treat it like a eulogy — kind but honest."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">How far did you get?</label>
+        <div class="range-wrap">
+          <input type="range" class="form-range" id="sProgress" min="0" max="100" value="30" oninput="document.getElementById('sProgressVal').textContent = this.value + '%'">
+          <div class="range-val" id="sProgressVal">30%</div>
+        </div>
+        <div class="form-hint">0% = never started, 100% = basically done (liar)</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Why did you stop? *</label>
+        <input class="form-input" id="sReason" type="text" placeholder="Be honest. 'Lost motivation' is a perfectly valid answer.">
+        <div class="form-hint">This is the most important field. Be real.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Contact email <span style="color:var(--warm-gray); font-weight:300">(optional)</span></label>
+        <input class="form-input" id="sEmail" type="email" placeholder="In case someone wants to adopt your project">
+        <div class="form-hint">Not shown publicly. Only shared if someone wants to adopt your idea.</div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+        <button class="btn btn-primary" onclick="submitProject()" style="flex: 1; min-width: 180px;">Bury this project →</button>
+        <button class="btn btn-ghost" onclick="showPage('browse')" style="flex: 1; min-width: 140px;">Never mind</button>
+      </div>
+    </div>
+
+    <div class="submit-success" id="submitSuccess">
+      <div class="success-icon">🪦</div>
+      <div class="success-title">Rest in peace, little project.</div>
+      <p class="success-sub" style="margin-bottom: 1.5rem;">Your idea has been buried with dignity. Someone will find it. They might even finish it.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="showPage('browse')">Browse the graveyard</button>
+        <button class="btn btn-ghost" onclick="resetSubmit()">Submit another</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const projects = [
+  {
+    id: 1,
+    title: "Roamly",
+    category: "tech",
+    description: "A travel app that generated hyper-local itineraries using your Spotify listening history. The idea was: if you listen to jazz, you probably want jazz bars. If you like ambient music, maybe you want quiet temples.",
+    progress: 65,
+    reason: "App Store rejection. Twice.",
+    reasonFull: "Apple rejected the app twice for 'insufficient functionality.' The second rejection broke my spirit. I'd spent four months on this. The third attempt would've taken another two months I didn't have.",
+    date: "Mar 2025",
+    author: "Tomás R.",
+    adoptions: 3
+  },
+  {
+    id: 2,
+    title: "The Cartographer's Daughter",
+    category: "creative",
+    description: "A literary novel about a woman who inherits her estranged father's map-making business and discovers he'd been charting imaginary places his entire career. I got four chapters in.",
+    progress: 22,
+    reason: "Chapter 4 and I forgot who my protagonist was.",
+    reasonFull: "I wrote the first chapter in a fever. The second and third felt like pulling teeth. By chapter four I realized I had no idea who my main character actually was — she kept changing personality between scenes. I couldn't reconcile her and gave up.",
+    date: "Nov 2024",
+    author: "Priya M.",
+    adoptions: 7
+  },
+  {
+    id: 3,
+    title: "Pantry Brain",
+    category: "tech",
+    description: "Scan your pantry, get weekly meal plans and an auto-sorted grocery list. Like having a very organized friend who never forgets you hate cilantro. Built the backend, got stuck on the camera scanning.",
+    progress: 48,
+    reason: "OCR on pantry items is genuinely hard.",
+    reasonFull: "Turns out reading handwritten 'quinoa' from a plastic bag under kitchen fluorescent lighting is not a solved problem. I spent three weeks on the image recognition alone. Then I ran out of free OpenAI credits and never came back.",
+    date: "Jan 2025",
+    author: "Dev K.",
+    adoptions: 12
+  },
+  {
+    id: 4,
+    title: "Secondhand Sundays",
+    category: "business",
+    description: "A monthly subscription box of curated secondhand books, each annotated by the previous owner with their notes, underlines, and marginalia intact. 'Read someone else's relationship with a book.'",
+    progress: 35,
+    reason: "Logistics nightmare. Books are heavy.",
+    reasonFull: "The idea was wonderful. The unit economics were not. A single book costs $3 to source, $8 to ship, and customers expected to pay $25/month for three of them. I needed 1,000 subscribers before it'd break even. I got 14 sign-ups from friends and family and quietly shut down the waitlist.",
+    date: "Sep 2024",
+    author: "Lena H.",
+    adoptions: 5
+  },
+  {
+    id: 5,
+    title: "Tempo",
+    category: "personal",
+    description: "A personal productivity system I designed that treated your week like a music composition. Tasks had rhythms, energy had dynamics, and deep work was the 'melody.' I made a Notion template and wrote a 4,000-word guide.",
+    progress: 80,
+    reason: "I stopped using my own system.",
+    reasonFull: "I am the world's worst advertisement for my own productivity method. Three weeks after launching the guide, I was back to a chaotic notes app. Turns out designing systems and actually living inside them are entirely different skills. The guide has 400 downloads though.",
+    date: "Feb 2025",
+    author: "Marcus O.",
+    adoptions: 2
+  },
+  {
+    id: 6,
+    title: "Honest Eulogy",
+    category: "creative",
+    description: "A podcast where people record the eulogy they'd *actually* want delivered — funny, strange, specific. No 'he was a wonderful man.' Just real stories. I recorded 6 pilot episodes.",
+    progress: 55,
+    reason: "Couldn't get guests who didn't cringe.",
+    reasonFull: "People *wanted* to do it. Then they sat down at the mic and became someone completely different. The self-censorship was immediate. I interviewed 11 people, got 6 usable recordings, and realized I was more interested in the conversation before the recording started.",
+    date: "Oct 2024",
+    author: "Sofia B.",
+    adoptions: 9
+  },
+  {
+    id: 7,
+    title: "ClassroomOS",
+    category: "tech",
+    description: "A lightweight student dashboard for high school teachers: track assignments, flag struggling students, and auto-generate weekly parent updates. Built for one teacher, almost finished.",
+    progress: 90,
+    reason: "The teacher I built it for switched schools.",
+    reasonFull: "This was 90% done. I had one real user — my cousin who teaches 10th grade biology — and I built it around her specific workflow. She moved to a private school that had its own system. I had a product that fit exactly one person, and that person no longer needed it.",
+    date: "Dec 2024",
+    author: "Aisha J.",
+    adoptions: 18
+  },
+  {
+    id: 8,
+    title: "The Stillness Club",
+    category: "personal",
+    description: "A daily 5-minute guided meditation email, written by hand for each subscriber based on what they'd said they were anxious about. Hyper-personalized mindfulness. I had 31 subscribers.",
+    progress: 42,
+    reason: "Writing 31 personal emails daily was unsustainable.",
+    reasonFull: "Completely my fault for not thinking through the scaling problem. The idea was: mass-personalization feels mass, real personalization doesn't scale. I was spending 2–3 hours a day on this and making nothing. I loved the project. I could not sustain it.",
+    date: "Jan 2025",
+    author: "Yuki T.",
+    adoptions: 6
+  }
+];
+
+let currentFilter = 'all';
+let currentProject = null;
+
+// ── RENDER CARD ──
+function renderCard(p, clickable = true) {
+  const catLabels = { tech: 'Tech', creative: 'Creative', business: 'Business', personal: 'Personal' };
+  return `
+    <div class="card" data-cat="${p.category}" data-id="${p.id}" onclick="${clickable ? `openProject(${p.id})` : ''}">
+      <div class="card-top">
+        <span class="cat-tag ${p.category}">${catLabels[p.category]}</span>
+        <span class="card-date">${p.date}</span>
+      </div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-desc">${p.description.length > 120 ? p.description.slice(0, 120) + '…' : p.description}</div>
+      <div class="card-reason">
+        <span class="card-reason-label">Quit&nbsp;because</span>
+        <span>${p.reason}</span>
+      </div>
+      <div class="card-footer">
+        <div class="progress-label">
+          <span>Progress made</span>
+          <span>${p.progress}%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${p.progress}%"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── INIT ──
+function initFeatured() {
+  const featured = projects.slice(0, 3);
+  document.getElementById('featuredCards').innerHTML = featured.map(p => renderCard(p)).join('');
+}
+
+function initBrowse() {
+  renderBrowse('all');
+}
+
+function renderBrowse(filter) {
+  const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+  const container = document.getElementById('browseCards');
+  const noResults = document.getElementById('noResults');
+  if (filtered.length === 0) {
+    container.innerHTML = '';
+    noResults.style.display = 'block';
+  } else {
+    noResults.style.display = 'none';
+    container.innerHTML = filtered.map((p, i) => {
+      return `<div style="opacity:0;animation:fadeUp 0.4s ${i * 0.07}s forwards">${renderCard(p)}</div>`;
+    }).join('');
+  }
+}
+
+function filterCards(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filter = btn.dataset.filter;
+  currentFilter = filter;
+  renderBrowse(filter);
+}
+
+// ── PROJECT PAGE ──
+function openProject(id) {
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  currentProject = p;
+
+  const catLabels = { tech: 'Tech', creative: 'Creative', business: 'Business', personal: 'Personal' };
+  const html = `
+    <a class="project-back" onclick="showPage('browse')">← Back to the graveyard</a>
+    <div class="project-cat"><span class="cat-tag ${p.category}">${catLabels[p.category]}</span></div>
+    <h1 class="project-title">${p.title}</h1>
+    <div class="project-meta">
+      <span>👤 ${p.author}</span>
+      <span>📅 Buried ${p.date}</span>
+      <span>🌱 ${p.adoptions} adoption request${p.adoptions !== 1 ? 's' : ''}</span>
+    </div>
+    <div class="project-body">
+      <div class="project-section">
+        <div class="project-section-label">The idea</div>
+        <p>${p.description}</p>
+      </div>
+      <div class="project-progress">
+        <div class="project-section-label">How far they got</div>
+        <div class="progress-pct">${p.progress}%</div>
+        <div class="progress-big"><div class="progress-big-fill" style="width:${p.progress}%"></div></div>
+        <div class="progress-caption">${getProgressCaption(p.progress)}</div>
+      </div>
+      <div class="project-section">
+        <div class="project-section-label">Why they stopped</div>
+        <div class="project-reason-box"><p>${p.reasonFull}</p></div>
+      </div>
+      <div class="project-adopt">
+        <h3>Think you can finish it?</h3>
+        <p>Someone out there will finish what was started here. Maybe it's you. Click below and we'll let ${p.author.split(' ')[0]} know you're interested.</p>
+        <button class="btn btn-primary" onclick="openModal('${p.title}')">Adopt this project</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('projectContent').innerHTML = html;
+  showPage('project');
+  setTimeout(() => {
+    const fill = document.querySelector('.progress-big-fill');
+    if (fill) fill.style.width = p.progress + '%';
+  }, 100);
+}
+
+function getProgressCaption(pct) {
+  if (pct < 10) return "Barely got started. The idea existed mostly as a note.";
+  if (pct < 25) return "Early exploration. A few sketches, maybe a repo with two commits.";
+  if (pct < 50) return "Real progress. You can see the shape of the thing.";
+  if (pct < 70) return "Significant work. This one stings a little to let go.";
+  if (pct < 90) return "So close. Someone could actually pick this up and cross the finish line.";
+  return "Almost done. This is the most haunted kind of abandoned project.";
+}
+
+// ── MODAL ──
+function openModal(title) {
+  document.getElementById('modalProjectTitle').textContent = '"' + title + '"';
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function submitAdopt() {
+  closeModalDirect();
+  setTimeout(() => alert('Your adoption request has been sent! The original author will be in touch if they want to pass the torch.'), 200);
+}
+
+// ── SUBMIT ──
+function submitProject() {
+  const name = document.getElementById('sName').value.trim();
+  const cat = document.getElementById('sCat').value;
+  const desc = document.getElementById('sDesc').value.trim();
+  const reason = document.getElementById('sReason').value.trim();
+
+  if (!name || !cat || !desc || !reason) {
+    alert("Please fill in the required fields. Your project deserves at least that much.");
+    return;
+  }
+
+  const newProject = {
+    id: projects.length + 1,
+    title: name,
+    category: cat,
+    description: desc,
+    progress: parseInt(document.getElementById('sProgress').value),
+    reason: reason,
+    reasonFull: reason,
+    date: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+    author: "You",
+    adoptions: 0
+  };
+
+  projects.unshift(newProject);
+  document.getElementById('submitFormArea').style.display = 'none';
+  document.getElementById('submitSuccess').classList.add('show');
+}
+
+function resetSubmit() {
+  document.getElementById('submitFormArea').style.display = 'block';
+  document.getElementById('submitSuccess').classList.remove('show');
+  document.getElementById('sName').value = '';
+  document.getElementById('sCat').value = '';
+  document.getElementById('sDesc').value = '';
+  document.getElementById('sReason').value = '';
+  document.getElementById('sEmail').value = '';
+  document.getElementById('sProgress').value = 30;
+  document.getElementById('sProgressVal').textContent = '30%';
+}
+
+// ── PAGE ROUTING ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.remove('active');
+    if (a.dataset.page === name) a.classList.add('active');
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (name === 'browse') renderBrowse(currentFilter);
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ── INIT ──
+initFeatured();
+initBrowse();
+</script>
+</body>
+</html>
